@@ -1,0 +1,9 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2015.05.22"]
+[Result "0-1"]
+[TimeControl "15|10"]
+
+1.e4 e5 2.Bc4 f6 3.Qe2 Bc5 4.Nf3 Nc6 5.c3 Nge7 6.d3 d5 7.exd5 Nxd5 8.d4 Bb6 9.dxe5 fxe5 10.Nxe5 Qe7
+ 11.Bxd5 Qxe5 12.Bxc6+ bxc6 13.Qxe5+ Kf7 14.O-O Re8 15.Qf4+ Kg8 16.b4 Ba6 17.c4 Rad8 18.b5 cxb5 19.Nc3 b4 20.Nd5 Bc5
+ 21.Nxc7 Rf8 22.Qe5 Bxf2+ 23.Rxf2 Rd1+ 24.Rf1 Rfxf1# 0-1
