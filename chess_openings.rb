@@ -63,5 +63,5 @@ if eco_game.get_eco.nil?
   puts "No opening found"
 else
   puts eco_game.get_eco.name
-  puts eco_game.get_eco.eco
+  puts eco_game.get_eco.eco_code
 end

@@ -1,3 +1,5 @@
+require 'json'
+
 class SearchTree
 
   attr_accessor :root
@@ -8,30 +10,12 @@ class SearchTree
   end
 
   def load_openings
-    openings = File.readlines("openings_array.rb")
-    num_of_openings = openings[0]
-    index = 1
-    counter = 0
-
+    
+    openings = JSON.load(File.open("openings.json"))["openings"]
     result = []
 
-    while counter < num_of_openings.to_i
-      counter += 1
-
-      name = openings[index].chomp
-      eco = openings[index + 1].chomp
-      moves_array = openings[index + 2].split(', ')
-
-      moves_array.last.chomp!
-      # puts "==========="
-      # puts "Treating opening number #{counter}"
-      # puts "==========="
-
-      
-      result << Opening.new(name, eco, moves_array)
-
-      
-      index += 4
+    openings.each do |op|
+      result << Opening.new(op["name"], op["eco_code"], op["moves"])
     end
 
     result.sort! { |x, y| x.moves.size <=> y.moves.size }
@@ -81,18 +65,18 @@ class SearchTree
 
       moves.each_with_index do |move, index|
 
-        if curr_hash[move].nil?
-          return curr_node.value || nil
-        else
+        if curr_hash.keys.include?(move)
           curr_node = curr_hash[move]
           curr_hash = curr_hash[move].nodes
           return curr_node.value if curr_hash.empty? || moves.size == index + 1
+        else
+          return curr_node.value || nil
         end
 
       end
 
     else
-      return @root[moves].nil? ? nil : @root[moves].value
+      return @root.keys.include?(moves) ? @root[moves].value : nil
     end
   end
 

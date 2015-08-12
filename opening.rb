@@ -1,19 +1,19 @@
 class Opening
 
-  attr_accessor :name, :eco, :moves
+  attr_accessor :name, :eco_code, :moves
 
-  def initialize(name, eco, moves)
+  def initialize(name, eco_code, moves)
     @name = name
-    @eco = eco
+    @eco_code = eco_code
     @moves = moves
   end
 
   def to_s
-    "#{@eco}: #{@name}\n#{@moves}"
+    "#{@eco_code}: #{@name}\n#{@moves}"
   end
 
   def to_h
-    { "name" => @name, "eco" => @eco, "moves" => @moves }
+    { "name" => @name, "eco_code" => @eco_code, "moves" => @moves }
   end
 
 end
