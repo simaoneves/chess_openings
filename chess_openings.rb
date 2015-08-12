@@ -10,7 +10,9 @@ class ECO
   def initialize
     @game = PGN.parse(File.read("./pgn_files/3821.pgn")).first
     @moves = @game.moves
-    @tree = SearchTree.new.load_openings
+    @tree = SearchTree.new
+
+    @tree.load_openings
   end
 
   def get_move(move_num, player)

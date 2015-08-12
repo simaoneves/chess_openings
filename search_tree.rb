@@ -12,6 +12,20 @@ class SearchTree
     return @root.empty?
   end
 
+  def ==(other)
+    return false unless self.root.size == other.root.size
+    
+    @root.keys.each do |key|
+      return false unless other.root.keys.include?(key)
+    end
+
+    @root.keys.each do |key|
+      return false unless @root[key] == other.root[key]
+    end
+
+    true
+  end
+
   def load_openings
     
     openings = JSON.load(File.open("openings.json"))["openings"]
@@ -91,10 +105,23 @@ class SearchTree
       @value = value
       @nodes = {}
     end
-  end
 
-  def is_leaf?
-    return @nodes.empty?
+    def is_leaf?
+      return @nodes.empty?
+    end
+
+    def ==(other)
+      return false if @nodes.size != other.nodes.size || @value != other.value
+      @nodes.keys.each do |key|
+        return false unless other.nodes.keys.include?(key)
+      end
+
+      @nodes.keys.each do |key|
+        return false if @nodes[key] != other.nodes[key]
+      end
+
+      true
+    end
   end
 
 end

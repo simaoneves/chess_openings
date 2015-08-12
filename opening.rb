@@ -16,4 +16,8 @@ class Opening
     { "name" => @name, "eco_code" => @eco_code, "moves" => @moves }
   end
 
+  def ==(other)
+    @name == other.name && @eco_code == other.eco_code && @moves == other.moves
+  end
+
 end

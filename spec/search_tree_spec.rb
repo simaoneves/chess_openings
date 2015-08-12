@@ -1,59 +1,100 @@
-load 'opening.rb'
 load 'search_tree.rb'
 
 RSpec.describe SearchTree  do
 
   context '.new' do
-
     let(:tree) { SearchTree.new }
 
     it 'should be empty' do
       expect(tree).to be_empty
     end
-
   end
 
-  context '.size' do
+  context '==' do
     let(:tree) { SearchTree.new }
-    let(:italian) { Opening.new("Italian Game", "A50", %w{e4 e5 Nf3 Nc6 Bc4 Bc5}) }
-    let(:sicilian) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
-    let(:caro_kahn) { Opening.new("Caro-Kahn Defence", "B10", %w{e4 c6 d4 d5}) }
+    let(:tree2) { SearchTree.new }
 
-    xit 'should return 0 when .new' do
-      expect(tree.size).to eq 0
+    it "should return true if 2 trees are equal" do
+      expect(tree).to eq tree2
     end
 
-    xit "should return the number of openings in the tree" do
-      tree.insert italian, italian.moves
-      tree.insert sicilian, sicilian.moves
-      tree.insert caro_kahn, caro_kahn.moves
-      expect(tree.size).to eq 3
+    it "should return false if trees are not equal" do
+      tree.root["1"] = "error"
+      expect(tree).to_not eq tree2
+
+      tree2.root["1"] = "error"
+      expect(tree).to eq tree2
+
+      tree.root["2"] = "one"
+      tree2.root["2"] = "another"
+      expect(tree).to_not eq tree2
     end
   end
 
   context '.insert' do
     let(:tree) { SearchTree.new }
-    let(:italian) { Opening.new("Italian Game", "A50", %w{e4 e5 Nf3 Nc6 Bc4 Bc5}) }
+    let(:tree2) { SearchTree.new }
 
-    xit "should insert value into the tree" do
-
+    it "should insert value into the tree with a string" do
       expect(tree).to be_empty
-      tree.insert italian, italian.moves
+      tree.insert "e4", "King's pawn game"
       expect(tree).to_not be_empty
-      expect(tree.size).to eq 1
     end
 
+    it "should insert value into the tree with an array" do
+      expect(tree).to be_empty
+      tree.insert %w{e4 c6 d4 d5}, "Caro-Kahn Defence"
+      expect(tree).to_not be_empty
+    end
+
+    xit "should insert values independent of their order" do
+
+      tree.insert "e4", "King's Pawn Game"
+      tree.insert %w{e4 c6 d4 d5}, "Caro-Kahn Defence"
+
+      tree2.insert %w{e4 c6 d4 d5}, "Caro-Kahn Defence"
+      tree2.insert "e4", "King's Pawn Game"
+
+      expect(tree).to eq tree2
+    end
   end
+
+  context '.size' do
+    let(:tree) { SearchTree.new }
+
+    xit "should return the number of openings in the tree" do
+      expect(tree.size).to eq 0
+      tree.insert "e4", "King's Pawn Game"
+      tree.insert %w{e4 c5}, "Sicilian Defense"
+      tree.insert %w{e4 c6 d4 d5}, "Caro-Kahn Defence"
+      expect(tree.size).to eq 3
+    end
+  end
+
+  context '.get' do
+    let(:tree) { SearchTree.new }
+
+    it "should return the value stored in the tree" do
+      tree.insert "e4", "King's Pawn Game"
+      tree.insert %w{e4 c5}, "Sicilian Defense"
+      tree.insert %w{e4 c6 d4 d5}, "Caro-Kahn Defence"
+
+      expect(tree.get("e4")).to eq "King's Pawn Game"
+      expect(tree.get(["e4", "c5"])).to eq "Sicilian Defense"
+      expect(tree.get(["e4", "c6", "d4", "d5"])).to eq "Caro-Kahn Defence"
+
+    end
+  end
+
 
   context '.load_openings' do
     let(:tree) { SearchTree.new }
-    it "should load all openings from file" do
+
+    xit "should load all openings from file" do
       expect(tree).to be_empty
       tree.load_openings
       expect(tree).to_not be_empty
     end
   end
-
-
   
 end
