@@ -5,7 +5,7 @@ Future Ruby gem to calculate ECO codes from a PGN file
 (actually this might expand to more funcitonality)
 
 ####TODOS:
-- ~~Get dictionary of all openings~~ Transform dictionary in to JSON
+- ~~Get dictionary of all openings~~ ~~Transform dictionary in to JSON~~
 - Divide files
 - Use Tests
 - Write documentation
