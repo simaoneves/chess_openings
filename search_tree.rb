@@ -6,7 +6,10 @@ class SearchTree
 
   def initialize
     @root = {}
-    load_openings
+  end
+
+  def empty?
+    return @root.empty?
   end
 
   def load_openings
