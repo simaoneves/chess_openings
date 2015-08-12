@@ -1,0 +1,17 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2015.07.17"]
+[White "jbolins1"]
+[Black "simaoneves"]
+[Result "1-0"]
+[WhiteElo "1173"]
+[BlackElo "1039"]
+[TimeControl "15|10"]
+[Termination "jbolins1 won by resignation"]
+
+1.d4 c6 2.e4 d5 3.Nc3 dxe4 4.Nxe4 Bf5 5.f3 Nf6 6.Nxf6+ exf6 7.c3 Bd6 8.Bc4 Qe7+ 9.Ne2 O-O 10.O-O Nd7
+ 11.Re1 Nb6 12.Bf4 Nxc4 13.Bxd6 Qe3+ 14.Kh1 Nxd6 15.Ng3 Qf4 16.Nh5 Qg5 17.Ng3 Rfe8 18.Nxf5 Nxf5 19.Re4 Ng3+ 20.hxg3 Rxe4
+ 21.fxe4 Qxg3 22.Qf3 Qh4+ 23.Kg1 Re8 24.Re1 g5 25.g3 Qh3 26.e5 g4 27.Qf2 Re6 28.Qh2 Qxh2+ 29.Kxh2 f5 30.b3 Rh6+
+ 31.Kg2 f4 32.gxf4 Rg6 33.Rg1 g3 34.c4 h5 35.Kf3 h4 36.d5 cxd5 37.cxd5 Kf8 38.d6 Ke8 39.f5 Rg7 40.e6 fxe6
+ 41.fxe6 h3 42.d7+ Ke7 43.Rxg3 Rxg3+ 44.Kxg3 Kd8 45.Kxh3 a5 46.Kg4 b5 47.Kf5 Ke7 48.Ke5 a4 49.Kd5 b4 50.Kc6 a3
+ 51.Kc7 1-0
