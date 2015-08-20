@@ -24,7 +24,7 @@ class ECO
     # return @eco_tree.search("b4")
     # return @eco_tree.search(["d4", "d5", "Nf3", "Nf6", "r3"])
     # return @eco_tree.search(["d4", "d5", "c4", "Bxf5"])
-    return @tree.get @moves
+    return @tree.search @moves
   end
 
   def to_s

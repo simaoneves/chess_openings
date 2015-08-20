@@ -5,29 +5,36 @@ class SearchTree
   attr_accessor :root
 
   def initialize
-    @root = {}
+    @root = Node.new(nil)
   end
 
   def empty?
-    return @root.empty?
+    @root.is_leaf?
+  end
+
+  def size
+    size_helper(@root)
+  end
+
+  def to_s
+    @root.to_s
   end
 
   def ==(other)
-    return false unless self.root.size == other.root.size
+    return false unless @root.size == other.root.size
     
     @root.keys.each do |key|
       return false unless other.root.keys.include?(key)
     end
 
     @root.keys.each do |key|
-      return false unless @root[key] == other.root[key]
+      return false unless @root.nodes[key] == other.root.nodes[key]
     end
 
     true
   end
 
   def load_openings
-    
     openings = JSON.load(File.open("openings.json"))["openings"]
     result = []
 
@@ -35,67 +42,58 @@ class SearchTree
       result << Opening.new(op["name"], op["eco_code"], op["moves"])
     end
 
-    result.sort! { |x, y| x.moves.size <=> y.moves.size }
-    result.each do |op|
-      insert op.moves, op
-    end
-
-  end
-
-  def to_s
-    @root.to_s
+    result.each { |op| insert op.moves, op }
   end
 
   def insert(moves, value)
-
-    if moves.is_a? Array
-
-      curr_node = @root
-
-      moves.each_with_index do |move, index|
-
-        if curr_node[move].nil?
-          if moves.size == (index + 1)
-            curr_node[move] = Node.new(value)
-          else
-            curr_node[move] = Node.new(move)
-            curr_node = curr_node[move].nodes
-          end
-        else
-          curr_node = curr_node[move].nodes
-        end
-
-      end
-
-
-    else
-      @root[moves] = Node.new(value)
-    end
-    
+    insert_helper(moves, value, @root)
   end
 
-  def get(moves)
-    if moves.is_a? Array
+  def search(moves)
+    search_helper(moves, @root)
+  end
 
-      curr_hash = @root
-      curr_node = nil
 
-      moves.each_with_index do |move, index|
+  private
 
-        if curr_hash.keys.include?(move)
-          curr_node = curr_hash[move]
-          curr_hash = curr_hash[move].nodes
-          return curr_node.value if curr_hash.empty? || moves.size == index + 1
+    def insert_helper(moves, value, curr_node)
+      return if moves.empty?
+
+      curr_hash = curr_node.nodes
+      move = moves.first
+
+      if curr_hash[move].nil?
+        if moves.size == 1
+          curr_hash[move] = Node.new(value)
         else
-          return curr_node.value || nil
+          curr_hash[move] = Node.new(nil)
         end
-
+      else
+        curr_hash[move].value = value if moves.size == 1 && curr_hash[move].value.nil?
       end
 
-    else
-      return @root.keys.include?(moves) ? @root[moves].value : nil
+      next_node = curr_hash[move]
+      insert_helper(moves.drop(1), value, next_node)
     end
-  end
+
+    def search_helper(moves, curr_node)
+      move = moves.first
+      curr_hash = curr_node.nodes
+
+      return nil if curr_hash[move].nil?
+
+      next_node = curr_hash[move]
+      return search_helper(moves.drop(1), next_node) || curr_hash[move].value
+    end
+
+    def size_helper(node)
+      sum = node.value.nil? ? 0 : 1
+      return sum if node.is_leaf?
+      node.keys.each do |key|
+        sum += size_helper(node.nodes[key])
+      end
+      return sum
+    end
 
   class Node
 
@@ -107,13 +105,25 @@ class SearchTree
     end
 
     def is_leaf?
-      return @nodes.empty?
+      @nodes.empty?
+    end
+
+    def size
+      @nodes.size
+    end
+
+    def keys
+      @nodes.keys
+    end
+
+    def include?(key)
+      @nodes.keys.include?(key)
     end
 
     def ==(other)
-      return false if @nodes.size != other.nodes.size || @value != other.value
+      return false if self.size != other.size || @value != other.value
       @nodes.keys.each do |key|
-        return false unless other.nodes.keys.include?(key)
+        return false unless other.keys.include?(key)
       end
 
       @nodes.keys.each do |key|
