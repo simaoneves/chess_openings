@@ -3,7 +3,7 @@ require 'pgn'
 load 'opening.rb'
 load 'search_tree.rb'
 
-class ECO
+class ChessOpenings
 
   attr_accessor :moves, :game
 
@@ -33,13 +33,4 @@ class ECO
 
   private
 
-end
-
-eco_game = ECO.new
-# puts eco_game.to_s
-if eco_game.get_eco_code.nil?
-  puts "No opening found"
-else
-  puts eco_game.get_eco_code.name
-  puts eco_game.get_eco_code.eco_code
 end
