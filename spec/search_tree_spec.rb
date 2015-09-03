@@ -1,4 +1,4 @@
-load 'search_tree.rb'
+
 
 RSpec.describe SearchTree  do
 

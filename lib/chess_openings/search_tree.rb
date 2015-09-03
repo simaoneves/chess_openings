@@ -34,8 +34,8 @@ class SearchTree
     true
   end
 
-  def load_openings
-    openings = JSON.load(File.open("openings.json"))["openings"]
+  def load_openings(file = "lib/chess_openings/json_openings/openings.json")
+    openings = JSON.load(File.open(file))["openings"]
     result = []
 
     openings.each do |op|

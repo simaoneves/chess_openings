@@ -1,4 +1,4 @@
-load 'opening.rb'
+
 
 RSpec.describe Opening do
 

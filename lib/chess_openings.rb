@@ -1,7 +1,7 @@
 require 'pgn'
 
-load 'opening.rb'
-load 'search_tree.rb'
+load 'chess_openings/opening.rb'
+load 'chess_openings/search_tree.rb'
 
 class ChessOpenings
 
