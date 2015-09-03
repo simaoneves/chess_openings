@@ -48,4 +48,15 @@ RSpec.describe Opening do
       expect(caro_kahn).to_not eq sicilian
     end
   end
+
+  context ".to_pgn" do
+    let(:sicilian) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
+    let(:caro_kahn) { Opening.new("Caro-Kahn Defence", "B10", %w{e4 c6 d4 d5}) }
+
+    it "should transform moves into pgn string" do
+      expect(sicilian.to_pgn).to eq "1. e4 c5"
+      expect(caro_kahn.to_pgn).to eq "1. e4 c6 2. d4 d5"
+    end
+
+  end
 end
