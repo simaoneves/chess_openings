@@ -1,5 +1,3 @@
-require 'json'
-
 class SearchTree
 
   attr_accessor :root
@@ -34,17 +32,6 @@ class SearchTree
     true
   end
 
-  def load_openings(file = "lib/chess_openings/json_openings/openings.json")
-    openings = JSON.load(File.open(file))["openings"]
-    result = []
-
-    openings.each do |op|
-      result << Opening.new(op["name"], op["eco_code"], op["moves"])
-    end
-
-    result.each { |op| insert op.moves, op }
-  end
-
   def insert(moves, value)
     insert_helper(moves, value, @root)
   end
@@ -53,23 +40,61 @@ class SearchTree
     search_helper(moves, @root)
   end
 
+  def search_all_with_moves(moves)
+    node = find_node(moves, @root)
+    get_all_from_node(node).flatten
+  end
+
 
   private
+
+    def find_node(moves, curr_node)
+      return if moves.empty?
+
+      curr_hash = curr_node.nodes
+      move = moves.first
+      last = moves.size == 1
+
+      return nil if curr_hash[move].nil?
+      
+      if last
+        return curr_node
+      else
+        next_node = curr_hash[move]
+        find_node(moves.drop(1), next_node)
+      end
+    end
+
+    def get_all_from_node(curr_node)
+
+      result = curr_node.value.nil? ? [] : [curr_node.value]
+      return result if curr_node.is_leaf?
+
+      curr_hash = curr_node.nodes
+
+      curr_hash.each do |key, value|
+        next_node = value
+        result << get_all_from_node(next_node)
+      end
+
+      result
+    end
 
     def insert_helper(moves, value, curr_node)
       return if moves.empty?
 
       curr_hash = curr_node.nodes
       move = moves.first
+      last = moves.size == 1
 
       if curr_hash[move].nil?
-        if moves.size == 1
+        if last
           curr_hash[move] = Node.new(value)
         else
           curr_hash[move] = Node.new(nil)
         end
       else
-        curr_hash[move].value = value if moves.size == 1 && curr_hash[move].value.nil?
+        curr_hash[move].value = value if last && curr_hash[move].value.nil?
       end
 
       next_node = curr_hash[move]

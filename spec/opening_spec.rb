@@ -1,10 +1,11 @@
-
-
 RSpec.describe Opening do
 
-  context '.new' do
-    let(:sicilian) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
-    
+  let(:sicilian) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
+  let(:sicilian2) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
+  let(:sicilian3) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
+  let(:caro_kann) { Opening.new("Caro-Kann defence", "B12", %w{e4 c6 d4 d5}) }
+
+  context '.new' do    
     it "should have name, eco code and moves" do
       expect(sicilian.name).to eq "Sicilian Defence"
       expect(sicilian.eco_code).to eq "B20"
@@ -13,25 +14,18 @@ RSpec.describe Opening do
   end
 
   context '.to_h' do
-    let(:caro_kahn) { Opening.new("Caro-Kahn Defence", "B10", %w{e4 c6 d4 d5}) }
-
     it "should return a hash of the instance variables" do
       result = { 
-        "name" => "Caro-Kahn Defence",
-        "eco_code" => "B10",
+        "name" => "Caro-Kann defence",
+        "eco_code" => "B12",
         "moves" => ["e4", "c6", "d4", "d5"]
       }
 
-      expect(caro_kahn.to_h).to eq result
+      expect(caro_kann.to_h).to eq result
     end
   end
 
   context '==' do
-    let(:sicilian) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
-    let(:sicilian2) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
-    let(:sicilian3) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
-    let(:caro_kahn) { Opening.new("Caro-Kahn Defence", "B10", %w{e4 c6 d4 d5}) }
-
     it "should give normal equality notion" do
 
       # Reflexivity
@@ -45,17 +39,14 @@ RSpec.describe Opening do
       expect(sicilian2).to eq sicilian3
       expect(sicilian).to eq sicilian3
       
-      expect(caro_kahn).to_not eq sicilian
+      expect(caro_kann).to_not eq sicilian
     end
   end
 
   context ".to_pgn" do
-    let(:sicilian) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
-    let(:caro_kahn) { Opening.new("Caro-Kahn Defence", "B10", %w{e4 c6 d4 d5}) }
-
     it "should transform moves into pgn string" do
       expect(sicilian.to_pgn).to eq "1. e4 c5"
-      expect(caro_kahn.to_pgn).to eq "1. e4 c6 2. d4 d5"
+      expect(caro_kann.to_pgn).to eq "1. e4 c6 2. d4 d5"
     end
 
   end

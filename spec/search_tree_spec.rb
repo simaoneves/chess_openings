@@ -1,5 +1,3 @@
-
-
 RSpec.describe SearchTree  do
 
   context '.new' do
@@ -72,7 +70,7 @@ RSpec.describe SearchTree  do
     end
   end
 
-  context '.get' do
+  context '.search' do
     let(:tree) { SearchTree.new }
 
     it "should return the value stored in the tree" do
@@ -87,14 +85,20 @@ RSpec.describe SearchTree  do
     end
   end
 
-
-  context '.load_openings' do
+  context '.search_all_with_moves' do
     let(:tree) { SearchTree.new }
 
-    it "should load all openings from file" do
-      expect(tree).to be_empty
-      tree.load_openings
-      expect(tree).to_not be_empty
+    it "should return array with all openings that start with the moves given" do
+      tree.insert ["e4"], "King's Pawn Game"
+      tree.insert %w{e4 c5}, "Sicilian Defense"
+      tree.insert %w{e4 c6 d4 d5}, "Caro-Kahn Defence"
+      tree.insert %w{e4 c6 d4 d5 Nf3}, "Caro-Kahn Defence Knight"
+
+      expect(tree.search_all_with_moves(["e4"])).to be_a Array
+      expect(tree.search_all_with_moves(["e4"]).count).to eq 4
+      expect(tree.search_all_with_moves(%w{e4 c6 d4 d5}).count).to eq 2
+      expect(tree.search_all_with_moves(%w{e4 c6 d4 d5})).to include("Caro-Kahn Defence")
+      expect(tree.search_all_with_moves(%w{e4 c6 d4 d5})).to_not include("King's Pawn Game")
     end
   end
   
