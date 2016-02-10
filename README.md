@@ -3,21 +3,11 @@ Chess Openings
 Future Ruby gem to calculate Chess Openings from a PGN file (and others)
 
 ## TODOS:
-- ~~Get dictionary of all openings~~ and ~~Transform dictionary in to JSON~~
-- ~~Divide files~~
-- ~~Use Tests~~
 - Write documentation
 - Wrap everything up in a Ruby gem
-- ~~Get opening from PGN file~~
-- ~~Get opening from PGN string~~
-- ~~Get opening from array with moves~~
 - Get opening from FEN (maybe?)
-- ~~Search opening by name~~
-- ~~Get all openings~~
-- ~~Get all openings that start with some determined moves~~
-- ~~Get PGN string from an opening~~
 - Raise error if no opening found (search all with moves)
-- "Get all openings that start with some determined moves" is returning more openings that is suposed to, i think it ignores the last move
+- Make CLI to parse openings from website
 
 ## Features:
 - Get opening from PGN file

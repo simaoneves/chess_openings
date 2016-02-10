@@ -49,20 +49,14 @@ class SearchTree
   private
 
     def find_node(moves, curr_node)
-      return if moves.empty?
+      return curr_node if moves.empty?
 
       curr_hash = curr_node.nodes
       move = moves.first
-      last_move = moves.size == 1
-
       return nil if curr_hash[move].nil?
       
-      if last_move
-        return curr_node
-      else
-        next_node = curr_hash[move]
-        find_node(moves.drop(1), next_node)
-      end
+      next_node = curr_hash[move]
+      find_node(moves.drop(1), next_node)
     end
 
     def get_all_from_node(curr_node)
