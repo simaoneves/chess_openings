@@ -4,6 +4,7 @@ RSpec.describe ChessOpenings do
 
   subject(:subject) { ChessOpenings.new }
   let(:sicilian) { Opening.new("Sicilian defence", "B20", %w{e4 c5}) }
+  let(:kings_pawn) { Opening.new("King's pawn game", "C20", %i{e4 e5}) }
   let(:caro_kann) { Opening.new("Caro-Kann defence", "B12", %w{e4 c6 d4 d5}) }
   let(:ruy_lopez_exchange) { Opening.new("Ruy Lopez, exchange variation", "C68", %w{e4 e5 Nf3 Nc6 Bb5 a6 Bxc6}) }
 
@@ -73,6 +74,12 @@ RSpec.describe ChessOpenings do
       expect(subject.get_all).to be_a Array
       expect(subject.get_all.size).to eq num_opening
     end
-    
+  end
+
+  context '.from_fen' do
+    it "should return all openings that may match the FEN string given" do
+      expect(subject.from_fen("rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 1").size).to eq 1
+      expect(subject.from_fen("rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 1").first).to eq kings_pawn
+    end
   end
 end
