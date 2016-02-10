@@ -1,3 +1,5 @@
+require_relative '../lib/chess_openings/search_tree.rb'
+
 RSpec.describe SearchTree  do
 
   context '.new' do
@@ -33,17 +35,23 @@ RSpec.describe SearchTree  do
     let(:tree) { SearchTree.new }
     let(:tree2) { SearchTree.new }
 
+    it "should receive moves as symbols" do
+      tree.insert %i{e4 c6 d4 d5}, "Caro-Kahn Defence"
+      expect(tree).to_not be_empty
+      expect(tree.root.nodes[:e4].nodes[:c6].nodes[:d4].nodes[:d5].value).to eq "Caro-Kahn Defence"
+    end
+
     it "should insert value into the tree with an array" do
       expect(tree).to be_empty
       tree.insert %w{e4 c6 d4 d5}, "Caro-Kahn Defence"
       expect(tree).to_not be_empty
-      expect(tree.root.nodes["e4"].nodes["c6"].nodes["d4"].nodes["d5"].value).to eq "Caro-Kahn Defence"
+      expect(tree.root.nodes[:e4].nodes[:c6].nodes[:d4].nodes[:d5].value).to eq "Caro-Kahn Defence"
 
 
       expect(tree2).to be_empty
       tree2.insert ["e4"], "King's pawn game"
       expect(tree2).to_not be_empty
-      expect(tree2.root.nodes["e4"].value).to eq "King's pawn game"
+      expect(tree2.root.nodes[:e4].value).to eq "King's pawn game"
     end
 
     it "should insert values independent of their order" do

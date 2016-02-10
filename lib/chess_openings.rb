@@ -29,6 +29,7 @@ class ChessOpenings
   end
 
   def from_moves(moves)
+    # moves.map! { |move| move.to_s if move.is_a? Symbol }
     @tree.search moves
   end
 
@@ -63,9 +64,11 @@ class ChessOpenings
     @tree.search moves
   end
 
-  def to_s
-    @tree.to_s
-  end
+  private
+
+    def to_s
+      @tree.to_s
+    end
 
 end
 

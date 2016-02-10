@@ -6,7 +6,6 @@ Future Ruby gem to calculate Chess Openings from a PGN file (and others)
 - Write documentation
 - Wrap everything up in a Ruby gem
 - Get opening from FEN (maybe?)
-- Raise error if no opening found (search all with moves)
 - Make CLI to parse openings from website
 
 ## Features:

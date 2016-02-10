@@ -5,7 +5,7 @@ class Opening
   def initialize(name, eco_code, moves)
     @name = name
     @eco_code = eco_code
-    @moves = moves
+    @moves = moves.map! { |move| move.is_a?(String)? move.to_sym : move }
   end
 
   def to_s

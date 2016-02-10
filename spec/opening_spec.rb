@@ -1,3 +1,5 @@
+require_relative '../lib/chess_openings/opening.rb'
+
 RSpec.describe Opening do
 
   let(:sicilian) { Opening.new("Sicilian Defence", "B20", %w{e4 c5}) }
@@ -9,7 +11,11 @@ RSpec.describe Opening do
     it "should have name, eco code and moves" do
       expect(sicilian.name).to eq "Sicilian Defence"
       expect(sicilian.eco_code).to eq "B20"
-      expect(sicilian.moves).to eq ["e4", "c5"]
+      expect(sicilian.moves).to eq [:e4, :c5]
+    end
+
+    it "should accept symbols as moves" do
+      expect(Opening.new("Sicilian Defence", "B20", %i{e4 c5}).moves).to eq [:e4, :c5]
     end
   end
 
@@ -18,7 +24,7 @@ RSpec.describe Opening do
       result = { 
         "name" => "Caro-Kann defence",
         "eco_code" => "B12",
-        "moves" => ["e4", "c6", "d4", "d5"]
+        "moves" => [:e4, :c6, :d4, :d5]
       }
 
       expect(caro_kann.to_h).to eq result

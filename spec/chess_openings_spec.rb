@@ -34,6 +34,10 @@ RSpec.describe ChessOpenings do
     it "should return Opening based on the array of moves given" do
       expect(subject.from_moves(["e4", "c6", "d4", "d5"])).to eq caro_kann
     end
+
+    it "should accept symbols as moves" do
+      expect(subject.from_moves([:e4, :c6, :d4, :d5])).to eq caro_kann
+    end
   end
 
   context '.with_name' do
@@ -54,6 +58,11 @@ RSpec.describe ChessOpenings do
       expect(subject.that_start_with(%w{e4})).to include(caro_kann)
       expect(subject.that_start_with(%w{e4 e5 Nf3 Nc6})).to include(ruy_lopez_exchange)
       expect(subject.that_start_with(%w{e4 e5 Nf3 Nc6})).to_not include(caro_kann)
+      expect(subject.that_start_with(%w{e4 e5 Nf3 Nc6})).to_not include(caro_kann)
+    end
+
+    it "should accept symbols as moves" do
+      expect(subject.that_start_with(%i{e4 e5 Nf3 Nc6})).to_not include(caro_kann)
     end
     
   end
