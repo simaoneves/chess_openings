@@ -16,6 +16,8 @@ Future Ruby gem to calculate Chess Openings from a PGN file (and others)
 - ~~Get all openings~~
 - ~~Get all openings that start with some determined moves~~
 - ~~Get PGN string from an opening~~
+- Raise error if no opening found (search all with moves)
+- "Get all openings that start with some determined moves" is returning more openings that is suposed to, i think it ignores the last move
 
 ## Features:
 - Get opening from PGN file

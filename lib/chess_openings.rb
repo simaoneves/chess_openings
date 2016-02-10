@@ -1,8 +1,8 @@
 require 'pgn'
 require 'json'
 
-load 'chess_openings/opening.rb'
-load 'chess_openings/search_tree.rb'
+require_relative 'chess_openings/opening.rb'
+require_relative 'chess_openings/search_tree.rb'
 
 class ChessOpenings
 

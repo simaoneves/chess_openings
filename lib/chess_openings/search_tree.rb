@@ -53,11 +53,11 @@ class SearchTree
 
       curr_hash = curr_node.nodes
       move = moves.first
-      last = moves.size == 1
+      last_move = moves.size == 1
 
       return nil if curr_hash[move].nil?
       
-      if last
+      if last_move
         return curr_node
       else
         next_node = curr_hash[move]
@@ -85,16 +85,16 @@ class SearchTree
 
       curr_hash = curr_node.nodes
       move = moves.first
-      last = moves.size == 1
+      last_move = moves.size == 1
 
       if curr_hash[move].nil?
-        if last
+        if last_move
           curr_hash[move] = Node.new(value)
         else
           curr_hash[move] = Node.new(nil)
         end
       else
-        curr_hash[move].value = value if last && curr_hash[move].value.nil?
+        curr_hash[move].value = value if last_move && curr_hash[move].value.nil?
       end
 
       next_node = curr_hash[move]
