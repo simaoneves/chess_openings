@@ -4,9 +4,10 @@ Future Ruby gem to calculate Chess Openings from a PGN file (and others)
 
 ## TODOS:
 - Write documentation
-- Wrap everything up in a Ruby gem
 - Get opening from FEN
+- Get FEN from opening
 - Make CLI to parse openings from website
+- Complete README
 
 ## Features:
 - Get opening from PGN file
@@ -18,6 +19,7 @@ Future Ruby gem to calculate Chess Openings from a PGN file (and others)
 - Get all openings that start with some determined moves
 - Get PGN string from an opening
 - Get opening from FEN
+- Get FEN from opening
 
 ## Installation
 

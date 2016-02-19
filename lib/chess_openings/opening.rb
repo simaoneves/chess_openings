@@ -1,3 +1,6 @@
+require 'pgn'
+require_relative 'chess_openings_helper.rb'
+
 class Opening
 
   attr_accessor :name, :eco_code, :moves
@@ -37,4 +40,10 @@ class Opening
     end
     return result
   end
+
+  def to_fen
+    moves = ChessOpeningsHelper.moves_as_strings(@moves)
+    PGN::Game.new(moves).fen_list.last
+  end
+
 end

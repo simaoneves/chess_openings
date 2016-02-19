@@ -29,7 +29,6 @@ class ChessOpenings
   end
 
   def from_moves(moves)
-    # moves.map! { |move| move.to_s if move.is_a? Symbol }
     @tree.search moves
   end
 
@@ -62,6 +61,10 @@ class ChessOpenings
       moves << move
     end
     @tree.search moves
+  end
+
+  def from_fen(fen_string)
+    @list.select { |op| op.to_fen == fen_string }
   end
 
   private

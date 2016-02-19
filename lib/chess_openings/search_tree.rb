@@ -1,3 +1,5 @@
+require_relative 'chess_openings_helper.rb'
+
 class SearchTree
 
   attr_accessor :root
@@ -33,27 +35,23 @@ class SearchTree
   end
 
   def insert(moves, value)
-    moves = moves_in_symbols(moves)
+    moves = ChessOpeningsHelper.moves_as_symbols(moves)
     insert_helper(moves, value, @root)
   end
 
   def search(moves)
-    moves = moves_in_symbols(moves)
+    moves = ChessOpeningsHelper.moves_as_symbols(moves)
     search_helper(moves, @root)
   end
 
   def search_all_with_moves(moves)
-    moves = moves_in_symbols(moves)
+    moves = ChessOpeningsHelper.moves_as_symbols(moves)
     node = find_node(moves, @root)
     get_all_from_node(node).flatten
   end
 
 
   private
-
-    def moves_in_symbols(moves)
-      moves.map! { |move| move.is_a?(String)? move.to_sym : move }
-    end
 
     def find_node(moves, curr_node)
       return curr_node if moves.empty?

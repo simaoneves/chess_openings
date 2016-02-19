@@ -1,12 +1,18 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    coderay (1.1.0)
     diff-lcs (1.2.5)
+    method_source (0.8.2)
     mini_portile (0.6.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pgn (0.0.6)
       whittle
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -20,6 +26,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
+    slop (3.6.0)
     whittle (0.0.8)
 
 PLATFORMS
@@ -28,4 +35,8 @@ PLATFORMS
 DEPENDENCIES
   nokogiri (= 1.6.6.2)
   pgn (= 0.0.6)
+  pry
   rspec (~> 3.3.0)
+
+BUNDLED WITH
+   1.10.6
