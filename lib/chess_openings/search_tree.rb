@@ -40,8 +40,21 @@ class SearchTree
     get_all_from_node(node).flatten
   end
 
+  def get_moves_in_depth(num)
+    get_moves_in_depth_helper(num, @root, 0).flatten
+  end
 
   private
+
+    def get_moves_in_depth_helper(num_moves, curr_node, depth)
+      return [] if depth == num_moves && curr_node.value.nil?
+      return [curr_node.value] if depth == num_moves
+      result = []
+      curr_node.nodes.values.each do |node|
+        result << get_moves_in_depth_helper(num_moves, node, depth + 1)
+      end
+      return result
+    end
 
     def find_node(moves, curr_node)
       return curr_node if moves.empty?

@@ -109,5 +109,31 @@ RSpec.describe SearchTree  do
       expect(tree.search_all_with_moves(%w{e4 c6 d4 d5})).to_not include("King's Pawn Game")
     end
   end
+
+  context '.get_moves_in_depth' do
+    let(:tree) { SearchTree.new }
+    
+
+    it "should return 2 openings if num = 1" do
+      tree.insert ["e4"], "King's Pawn Game"
+      tree.insert ["a4"], "Test"
+      tree.insert %w{e4 c5}, "Sicilian Defense"
+      tree.insert %w{e4 c6 d4 d5}, "Caro-Kahn Defence"
+
+      expect(tree.get_moves_in_depth(1).size).to eq 2
+      expect(tree.get_moves_in_depth(1)).to include("King's Pawn Game")
+      expect(tree.get_moves_in_depth(1)).to include("Test")
+    end
+
+    it "should return empty array if num > depth" do
+      tree.insert ["e4"], "King's Pawn Game"
+      tree.insert ["a4"], "Test"
+      tree.insert %w{e4 c5}, "Sicilian Defense"
+      tree.insert %w{e4 c6 d4 d5}, "Caro-Kahn Defence"
+
+      expect(tree.get_moves_in_depth(20)).to eq []
+      expect(tree.get_moves_in_depth(20).size).to eq 0
+    end
+  end
   
 end

@@ -59,8 +59,8 @@ RSpec.describe Opening do
 
   context ".to_fen" do
     it "should return a fen string representing the game after the opening moves" do
-      expect(kings_pawn.to_fen).to eq 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 1'
-      expect(caro_kann.to_fen).to eq 'rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq d6 0 2'
+      expect(kings_pawn.to_fen).to eq 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'
+      expect(caro_kann.to_fen).to eq 'rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq d6 0 3'
       expect(caro_kann.to_fen).to_not eq 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
     end
 

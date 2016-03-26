@@ -36,7 +36,7 @@ class ChessOpenings
     raise LoadError, "File does not exist" unless File.exist?(file_name)
     begin
       game = PGN.parse(File.read(file_name)).first
-      @tree.search game.moves
+      @tree.search game.moves.map(&:notation)
     rescue
       raise InvalidPGNError, "Invalid PGN file"
     end
@@ -64,7 +64,10 @@ class ChessOpenings
   end
 
   def from_fen(fen_string)
-    @list.select { |op| op.to_fen == fen_string }
+    fen = PGN::FEN.new(fen_string)
+    move_number = (fen.fullmove.to_i - 1) * 2
+    final_list = @tree.get_moves_in_depth(move_number)
+    final_list.select { |op| op.to_fen == fen_string }.first
   end
 
   private

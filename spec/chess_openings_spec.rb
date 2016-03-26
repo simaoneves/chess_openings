@@ -77,11 +77,10 @@ RSpec.describe ChessOpenings do
   end
 
   context '.from_fen' do
-    it "should return array of all openings that may match the FEN string given" do
-      expect(subject.from_fen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 1')).to be_a Array
-      expect(subject.from_fen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 1').size).to eq 1
-      expect(subject.from_fen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 1').first).to eq kings_pawn
-      expect(subject.from_fen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 1')).to_not include(caro_kann)
+    it "should return opening that matches the FEN string given" do
+      expect(subject.from_fen('rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq d6 0 3')).to eq caro_kann
+      expect(subject.from_fen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2')).to eq kings_pawn
+      expect(subject.from_fen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2')).to_not eq sicilian
     end
   end
 end
