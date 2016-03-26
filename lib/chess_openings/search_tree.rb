@@ -21,17 +21,7 @@ class SearchTree
   end
 
   def ==(other)
-    return false unless @root.size == other.root.size
-    
-    @root.keys.each do |key|
-      return false unless other.root.keys.include?(key)
-    end
-
-    @root.keys.each do |key|
-      return false unless @root.nodes[key] == other.root.nodes[key]
-    end
-
-    true
+    @root == other.root
   end
 
   def insert(moves, value)
@@ -146,6 +136,7 @@ class SearchTree
 
     def ==(other)
       return false if self.size != other.size || @value != other.value
+      
       @nodes.keys.each do |key|
         return false unless other.keys.include?(key)
       end
