@@ -8,7 +8,7 @@ RSpec.describe Opening do
   let(:caro_kann) { Opening.new("Caro-Kann defence", "B12", %w{e4 c6 d4 d5}) }
   let(:kings_pawn) { Opening.new("King's pawn game", "C20", %w{e4 e5}) }
 
-  context '.new' do    
+  context '.new' do
     it "should have name, eco code and moves" do
       expect(sicilian.name).to eq "Sicilian Defence"
       expect(sicilian.eco_code).to eq "B20"
@@ -22,7 +22,7 @@ RSpec.describe Opening do
 
   context '.to_h' do
     it "should return a hash of the instance variables" do
-      result = { 
+      result = {
         "name" => "Caro-Kann defence",
         "eco_code" => "B12",
         "moves" => [:e4, :c6, :d4, :d5]
@@ -45,15 +45,15 @@ RSpec.describe Opening do
       # Transitivity
       expect(sicilian2).to eq sicilian3
       expect(sicilian).to eq sicilian3
-      
+
       expect(caro_kann).to_not eq sicilian
     end
   end
 
   context ".to_pgn" do
     it "should transform moves into pgn string" do
-      expect(sicilian.to_pgn).to eq "1. e4 c5"
-      expect(caro_kann.to_pgn).to eq "1. e4 c6 2. d4 d5"
+      expect(sicilian.to_pgn).to eq "1.e4 c5"
+      expect(caro_kann.to_pgn).to eq "1.e4 c6 2.d4 d5"
     end
   end
 

@@ -29,11 +29,11 @@ class Opening
     @moves.each do |move|
 
       if index.odd?
-        result += "#{(index / 2.0).ceil}. #{move}"
+        result += "#{(index / 2.0).ceil}.#{move}"
       elsif index.even? && @moves.size != index
         result += " #{move} "
       else
-        result += " #{move}"        
+        result += " #{move}"
       end
 
       index += 1

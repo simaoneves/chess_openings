@@ -53,7 +53,7 @@ class SearchTree
       curr_node.nodes.values.each do |node|
         result << get_moves_in_depth_helper(num_moves, node, depth + 1)
       end
-      return result
+      result
     end
 
     def find_node(moves, curr_node)
@@ -68,14 +68,11 @@ class SearchTree
     end
 
     def get_all_from_node(curr_node)
-
       result = curr_node.value.nil? ? [] : [curr_node.value]
       return result if curr_node.is_leaf?
 
       curr_hash = curr_node.nodes
-
-      curr_hash.each do |key, value|
-        next_node = value
+      curr_hash.values.each do |next_node|
         result << get_all_from_node(next_node)
       end
 
@@ -90,11 +87,7 @@ class SearchTree
       last_move = moves.size == 1
 
       if curr_hash[move].nil?
-        if last_move
-          curr_hash[move] = Node.new(value)
-        else
-          curr_hash[move] = Node.new(nil)
-        end
+        curr_hash[move] = last_move ? Node.new(value) : Node.new(nil)
       else
         curr_hash[move].value = value if last_move && curr_hash[move].value.nil?
       end

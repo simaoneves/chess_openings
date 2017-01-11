@@ -112,7 +112,6 @@ RSpec.describe SearchTree  do
 
   context '.get_moves_in_depth' do
     let(:tree) { SearchTree.new }
-    
 
     it "should return 2 openings if num = 1" do
       tree.insert ["e4"], "King's Pawn Game"

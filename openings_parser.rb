@@ -26,12 +26,12 @@ pages_to_scrap = [initial_page]
 
 # Scrap pages in pages_to_scrap array and dump Opening objects to openings array
 pages_to_scrap.each do |link|
-  
-  page = Nokogiri::HTML(open(link))   
+
+  page = Nokogiri::HTML(open(link))
   page.css('ul#tree li.closed div.line').each do |line|
 
     if has_more_than_1_code?(line.css('div.opname a').text)
-    
+
       pages_to_scrap << line.css('div.opname a').first["href"]
     else
       name = remove_eco_code(line.css('div.opname a').text)
@@ -62,16 +62,17 @@ if invalid_openings.empty?
   openings.map! { |op| op.to_h }
 
   # Write to JSON
-  File.delete("openings.json") if File.exists?("openings.json")
-  File.open("openings.json", "a+") do |file|
+  json_file = "openings.json"
+  File.delete(json_file) if File.exists?(json_file)
+  File.open(json_file, "a+") do |file|
     file.write("{\n")
     file.write("\"openings\": [\n")
-    
+
     openings.each_with_index do |op, index|
       result = openings.size == index + 1 ? "" : ", "
       file.write("#{JSON.generate(op)}#{result}\n")
     end
-    
+
     file.write("]")
     file.write("}")
 
@@ -82,4 +83,3 @@ else
   puts "There were some invalid openings detected:"
   puts invalid_openings
 end
-
