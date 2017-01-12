@@ -1,6 +1,5 @@
 # Helper class with utility functions
 class ChessOpeningsHelper
-
   # Transform contents of array to symbols
   #
   # @param [Array] moves Moves as strings or symbols
@@ -16,5 +15,4 @@ class ChessOpeningsHelper
   def self.moves_as_strings(moves)
     moves.map { |move| move.is_a?(Symbol) ? move.to_s : move }
   end
-
 end

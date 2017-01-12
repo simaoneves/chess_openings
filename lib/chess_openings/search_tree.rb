@@ -2,7 +2,6 @@ require_relative 'chess_openings_helper.rb'
 
 # Class that is a Tree-like data structure to hold all Openings
 class SearchTree
-
   attr_accessor :root
 
   def initialize
@@ -13,7 +12,7 @@ class SearchTree
   #
   # @return [Boolean] True if the tree doesnt have childs and root value is nil, false otherwise
   def empty?
-    @root.is_empty? && @root.is_leaf?
+    @root.empty? && @root.leaf?
   end
 
   # Number of not empty Nodes
@@ -76,78 +75,71 @@ class SearchTree
 
   private
 
-    def get_moves_in_depth_helper(num_moves, curr_node, depth)
-      return [] if depth == num_moves && curr_node.value.nil?
-      return [curr_node.value] if depth == num_moves
-      result = []
-      curr_node.nodes.values.each do |node|
-        result << get_moves_in_depth_helper(num_moves, node, depth + 1)
-      end
-      result
+  def get_moves_in_depth_helper(num_moves, curr_node, depth)
+    return [] if depth == num_moves && curr_node.value.nil?
+    return [curr_node.value] if depth == num_moves
+    result = []
+    curr_node.nodes.values.each do |node|
+      result << get_moves_in_depth_helper(num_moves, node, depth + 1)
+    end
+    result
+  end
+
+  def find_node(moves, curr_node)
+    return curr_node if moves.empty?
+
+    curr_hash = curr_node.nodes
+    move = moves.first
+    return nil if curr_hash[move].nil?
+
+    next_node = curr_hash[move]
+    find_node(moves.drop(1), next_node)
+  end
+
+  def get_all_from_node(curr_node)
+    result = curr_node.value.nil? ? [] : [curr_node.value]
+    return result if curr_node.leaf?
+
+    curr_hash = curr_node.nodes
+    curr_hash.values.each do |next_node|
+      result << get_all_from_node(next_node)
     end
 
-    def find_node(moves, curr_node)
-      return curr_node if moves.empty?
+    result
+  end
 
-      curr_hash = curr_node.nodes
-      move = moves.first
-      return nil if curr_hash[move].nil?
-
-      next_node = curr_hash[move]
-      find_node(moves.drop(1), next_node)
+  def insert_helper(moves, value, curr_node)
+    return if moves.empty?
+    curr_hash = curr_node.nodes
+    move = moves.first
+    last_move = moves.size == 1
+    if curr_hash[move].nil?
+      curr_hash[move] = last_move ? Node.new(value) : Node.new(nil)
+    elsif last_move && curr_hash[move].value.nil?
+      curr_hash[move].value = value
     end
+    insert_helper(moves.drop(1), value, curr_hash[move])
+  end
 
-    def get_all_from_node(curr_node)
-      result = curr_node.value.nil? ? [] : [curr_node.value]
-      return result if curr_node.is_leaf?
+  def search_helper(moves, curr_node)
+    move = moves.first
+    curr_hash = curr_node.nodes
+    return nil if curr_hash[move].nil?
+    next_node = curr_hash[move]
+    search_helper(moves.drop(1), next_node) || curr_hash[move].value
+  end
 
-      curr_hash = curr_node.nodes
-      curr_hash.values.each do |next_node|
-        result << get_all_from_node(next_node)
-      end
-
-      result
+  def size_helper(node)
+    sum = node.value.nil? ? 0 : 1
+    return sum if node.leaf?
+    node.keys.each do |key|
+      sum += size_helper(node.nodes[key])
     end
-
-    def insert_helper(moves, value, curr_node)
-      return if moves.empty?
-
-      curr_hash = curr_node.nodes
-      move = moves.first
-      last_move = moves.size == 1
-
-      if curr_hash[move].nil?
-        curr_hash[move] = last_move ? Node.new(value) : Node.new(nil)
-      else
-        curr_hash[move].value = value if last_move && curr_hash[move].value.nil?
-      end
-
-      next_node = curr_hash[move]
-      insert_helper(moves.drop(1), value, next_node)
-    end
-
-    def search_helper(moves, curr_node)
-      move = moves.first
-      curr_hash = curr_node.nodes
-
-      return nil if curr_hash[move].nil?
-
-      next_node = curr_hash[move]
-      return search_helper(moves.drop(1), next_node) || curr_hash[move].value
-    end
-
-    def size_helper(node)
-      sum = node.value.nil? ? 0 : 1
-      return sum if node.is_leaf?
-      node.keys.each do |key|
-        sum += size_helper(node.nodes[key])
-      end
-      return sum
-    end
+    sum
+  end
 
   # Class that represents a node of a tree data structure
   class Node
-
     attr_accessor :value, :nodes
 
     def initialize(value)
@@ -155,11 +147,11 @@ class SearchTree
       @nodes = {}
     end
 
-    def is_empty?
+    def empty?
       @value.nil?
     end
 
-    def is_leaf?
+    def leaf?
       @nodes.empty?
     end
 
@@ -176,18 +168,12 @@ class SearchTree
     end
 
     def ==(other)
-      return false if self.size != other.size || @value != other.value
-
+      return false if size != other.size || @value != other.value
       @nodes.keys.each do |key|
         return false unless other.keys.include?(key)
-      end
-
-      @nodes.keys.each do |key|
         return false if @nodes[key] != other.nodes[key]
       end
-
       true
     end
   end
-
 end

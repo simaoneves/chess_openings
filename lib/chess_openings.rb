@@ -6,29 +6,25 @@ require 'chess_openings/search_tree.rb'
 
 # Class responsible for searching for chess Openings
 class ChessOpenings
-
   attr_accessor :tree, :list
 
   def initialize
     @tree = SearchTree.new
     @list = []
-
     file = '/chess_openings/json_openings/openings.json'
     openings_file = File.join(File.dirname(__FILE__), file)
-
     openings = JSON.load(File.open(openings_file))['openings']
     openings.each do |op|
       opening = Opening.new(op['name'], op['eco_code'], op['moves'])
       @list << opening
       @tree.insert opening.moves, opening
     end
-
   end
 
   # Get all openings available
   #
   # @return [Array] Array with all the Openings possible
-  def get_all
+  def all
     @list.dup
   end
 
@@ -80,9 +76,9 @@ class ChessOpenings
     array = string.split
     moves = []
     array.each do |move|
-      if move.include?(".")
-        next if move.end_with?(".")
-        move = move.split(".").last
+      if move.include?('.')
+        next if move.end_with?('.')
+        move = move.split('.').last
       end
       moves << move
     end
@@ -102,13 +98,11 @@ class ChessOpenings
 
   private
 
-    def to_s
-      @tree.to_s
-    end
-
+  def to_s
+    @tree.to_s
+  end
 end
 
 # Exception raised when there is a error reading a PGN file
 class InvalidPGNError < RuntimeError
-
 end
