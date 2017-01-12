@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.7
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'><h1>Chess Openings</h1>
+
+<p>Ruby gem that where you can manipulate, search for and get information from chess openings.</p>
+
+<h2>TODOS:</h2>
+
+<ul>
+<li>Write documentation</li>
+</ul>
+
+<h2>Features:</h2>
+
+<ul>
+<li>Get opening from PGN file</li>
+<li>Get opening from PGN string</li>
+<li>Get opening from array with moves</li>
+<li>Get opening from FEN</li>
+<li>Search opening by name</li>
+<li>Get all openings</li>
+<li>Get all openings that start with some determined moves</li>
+<li>Get PGN string from an opening</li>
+<li>Get FEN from an opening</li>
+</ul>
+
+<h2>Installation</h2>
+
+<p>Add this line to your application&#39;s Gemfile:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>chess_openings</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre class="code ruby"><code class="ruby">$ gem install chess_openings
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>First things first, you need to create a new ChessOpenings object:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_chess_openings'>chess_openings</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ChessOpenings.html" title="ChessOpenings (class)">ChessOpenings</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ChessOpenings.html#initialize-instance_method" title="ChessOpenings#initialize (method)">new</a></span></span>
+</code></pre>
+
+<p>From here you can use several functions:</p>
+
+<h4>.from_pgn</h4>
+
+<p>Get opening from PGN file</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_chess_openings'>chess_openings</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ChessOpenings.html" title="ChessOpenings (class)">ChessOpenings</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ChessOpenings.html#initialize-instance_method" title="ChessOpenings#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_opening'>opening</span> <span class='op'>=</span> <span class='id identifier rubyid_chess_openings'>chess_openings</span><span class='period'>.</span><span class='id identifier rubyid_from_pgn'>from_pgn</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>path_to/pgn_game.pgn</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='comment'>#=&gt; #&lt;Opening:0x007fda6237b510 @name=&quot;English, Sicilian reversed&quot;, @eco_code=&quot;A25&quot;, @moves=[:c4, :e5, :Nc3, :Nc6]&gt;
+</span></code></pre>
+
+<h4>.from_string</h4>
+
+<p>Get opening from a string, formated like a PGN file</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_chess_openings'>chess_openings</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ChessOpenings.html" title="ChessOpenings (class)">ChessOpenings</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ChessOpenings.html#initialize-instance_method" title="ChessOpenings#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_opening'>opening</span> <span class='op'>=</span> <span class='id identifier rubyid_chess_openings'>chess_openings</span><span class='period'>.</span><span class='id identifier rubyid_from_string'>from_string</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Bxc6</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='comment'>#=&gt; #&lt;Opening:0x007f820961bf60 @name=&quot;Ruy Lopez, exchange variation&quot;, @eco_code=&quot;C68&quot;, @moves=[:e4, :e5, :Nf3, :Nc6, :Bb5, :a6, :Bxc6]&gt;
+</span></code></pre>
+
+<h4>.from_moves</h4>
+
+<p>Get opening from an array with moves (as symbols or strings)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_chess_openings'>chess_openings</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ChessOpenings.html" title="ChessOpenings (class)">ChessOpenings</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ChessOpenings.html#initialize-instance_method" title="ChessOpenings#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_opening'>opening</span> <span class='op'>=</span> <span class='id identifier rubyid_chess_openings'>chess_openings</span><span class='period'>.</span><span class='id identifier rubyid_from_moves'>from_moves</span> <span class='lbracket'>[</span><span class='symbol'>:e4</span><span class='comma'>,</span> <span class='symbol'>:c6</span><span class='comma'>,</span> <span class='symbol'>:d4</span><span class='comma'>,</span> <span class='symbol'>:d5</span><span class='rbracket'>]</span>
+<span class='comment'>#=&gt; #&lt;Opening:0x007f8209d9c910 @name=&quot;Caro-Kann defence&quot;, @eco_code=&quot;B12&quot;, @moves=[:e4, :c6, :d4, :d5]&gt;
+</span></code></pre>
+
+<h4>.with_name</h4>
+
+<p>Search openings by name</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_chess_openings'>chess_openings</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ChessOpenings.html" title="ChessOpenings (class)">ChessOpenings</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ChessOpenings.html#initialize-instance_method" title="ChessOpenings#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_openings'>openings</span> <span class='op'>=</span> <span class='id identifier rubyid_chess_openings'>chess_openings</span><span class='period'>.</span><span class='id identifier rubyid_with_name'>with_name</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>alekhine defence</span><span class='tstring_end'>&quot;</span></span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>[
+</span><span class='embdoc'>  [ 0] #&lt;Opening:0x007f8209de8a18 @name=&quot;Alekhine&#39;s defence&quot;, @eco_code=&quot;B02&quot;, @moves=[:e4, :Nf6]&gt;,
+</span><span class='embdoc'>  [ 1] #&lt;Opening:0x007f8209de8950 @name=&quot;Alekhine&#39;s defence, Scandinavian variation&quot;, @eco_code=&quot;B02&quot;, @moves=[:e4, :Nf6, :Nc3, :d5]&gt;,
+</span><span class='embdoc'>  [ 2] #&lt;Opening:0x007f8209de87e8 @name=&quot;Alekhine&#39;s defence, Spielmann variation&quot;, @eco_code=&quot;B02&quot;, @moves=[:e4, :Nf6, :Nc3, :d5, :e5, :Nfd7, :e6]&gt;,
+</span><span class='embdoc'>  ...
+</span><span class='embdoc'>]
+</span><span class='embdoc_end'>=end
+</span></code></pre>
+
+<h4>.get_all</h4>
+
+<p>Get all existing openings as an array</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_chess_openings'>chess_openings</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ChessOpenings.html" title="ChessOpenings (class)">ChessOpenings</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ChessOpenings.html#initialize-instance_method" title="ChessOpenings#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_all_openings'>all_openings</span> <span class='op'>=</span> <span class='id identifier rubyid_chess_openings'>chess_openings</span><span class='period'>.</span><span class='id identifier rubyid_get_all'>get_all</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>[
+</span><span class='embdoc'>  [0] #&lt;Opening:0x007f8209dd4b30 @name=&quot;Polish (Sokolsky) opening&quot;, @eco_code=&quot;A00&quot;, @moves=[:b4]&gt;,
+</span><span class='embdoc'>  [1] #&lt;Opening:0x007f8209dd4a90 @name=&quot;Polish, Tuebingen variation&quot;, @eco_code=&quot;A00&quot;, @moves=[:b4, :Nh6]&gt;,
+</span><span class='embdoc'>  [2] #&lt;Opening:0x007f8209dd49c8 @name=&quot;Polish, Outflank variation&quot;, @eco_code=&quot;A00&quot;, @moves=[:b4, :c6]&gt;,
+</span><span class='embdoc'>  ...
+</span><span class='embdoc'>]
+</span><span class='embdoc_end'>=end
+</span></code></pre>
+
+<h4>.that_start_with</h4>
+
+<p>Get all possible openings that start with determined moves</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_chess_openings'>chess_openings</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ChessOpenings.html" title="ChessOpenings (class)">ChessOpenings</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ChessOpenings.html#initialize-instance_method" title="ChessOpenings#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_e4_e5_openings'>e4_e5_openings</span> <span class='op'>=</span> <span class='id identifier rubyid_chess_openings'>chess_openings</span><span class='period'>.</span><span class='id identifier rubyid_that_start_with'>that_start_with</span> <span class='lbracket'>[</span><span class='symbol'>:e4</span><span class='comma'>,</span> <span class='symbol'>:e5</span><span class='rbracket'>]</span>
+
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>[
+</span><span class='embdoc'>  [0] #&lt;Opening:0x007ff69c858258 @name=&quot;King&#39;s pawn game&quot;, @eco_code=&quot;C20&quot;, @moves=[:e4, :e5]&gt;,
+</span><span class='embdoc'>  [1] #&lt;Opening:0x007ff69c858190 @name=&quot;KP, Indian opening&quot;, @eco_code=&quot;C20&quot;, @moves=[:e4, :e5, :d3]&gt;,
+</span><span class='embdoc'>  [2] #&lt;Opening:0x007ff69c8580a0 @name=&quot;KP, Mengarini&#39;s opening&quot;, @eco_code=&quot;C20&quot;, @moves=[:e4, :e5, :a3]&gt;,
+</span><span class='embdoc'>  [3] #&lt;Opening:0x007ff69a1a3dd8 @name=&quot;KP, King&#39;s head opening&quot;, @eco_code=&quot;C20&quot;, @moves=[:e4, :e5, :f3]&gt;,
+</span><span class='embdoc'>  [4] #&lt;Opening:0x007ff69a1a3248 @name=&quot;KP, Patzer opening&quot;, @eco_code=&quot;C20&quot;, @moves=[:e4, :e5, :Qh5]&gt;
+</span><span class='embdoc'>  ...
+</span><span class='embdoc'>]
+</span><span class='embdoc_end'>=end
+</span></code></pre>
+
+<h4>.from_fen</h4>
+
+<p>Get opening from FEN string</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_opening_from_fen'>opening_from_fen</span> <span class='op'>=</span> <span class='id identifier rubyid_chess_openings'>chess_openings</span><span class='period'>.</span><span class='id identifier rubyid_from_fen'>from_fen</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2</span><span class='tstring_end'>&#39;</span></span>
+<span class='comment'>#=&gt; #&lt;Opening:0x007ff69c858258 @name=&quot;King&#39;s pawn game&quot;, @eco_code=&quot;C20&quot;, @moves=[:e4, :e5]&gt;
+</span></code></pre>
+
+<p>When you have a opening you can invoke these methods on it:</p>
+
+<h4>.to_pgn</h4>
+
+<p>Get PGN string from an opening</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_opening'>opening</span> <span class='op'>=</span> <span class='id identifier rubyid_chess_openings'>chess_openings</span><span class='period'>.</span><span class='id identifier rubyid_from_moves'>from_moves</span> <span class='lbracket'>[</span><span class='symbol'>:e4</span><span class='comma'>,</span> <span class='symbol'>:e5</span><span class='comma'>,</span> <span class='symbol'>:Nf3</span><span class='comma'>,</span> <span class='symbol'>:Nc6</span><span class='comma'>,</span> <span class='symbol'>:Bb5</span><span class='comma'>,</span> <span class='symbol'>:a6</span><span class='comma'>,</span> <span class='symbol'>:Bxc6</span><span class='rbracket'>]</span>
+<span class='comment'>#=&gt; #&lt;Opening:0x007f820961bf60 @name=&quot;Ruy Lopez, exchange variation&quot;, @eco_code=&quot;C68&quot;, @moves=[:e4, :e5, :Nf3, :Nc6, :Bb5, :a6, :Bxc6]&gt;
+</span><span class='id identifier rubyid_opening'>opening</span><span class='period'>.</span><span class='id identifier rubyid_to_pgn'>to_pgn</span>
+<span class='comment'>#=&gt; &quot;1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Bxc6&quot;
+</span></code></pre>
+
+<h4>.to_fen</h4>
+
+<p>Get FEN string of the opening</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_opening'>opening</span> <span class='op'>=</span> <span class='id identifier rubyid_chess_openings'>chess_openings</span><span class='period'>.</span><span class='id identifier rubyid_from_moves'>from_moves</span> <span class='lbracket'>[</span><span class='symbol'>:e4</span><span class='comma'>,</span> <span class='symbol'>:e5</span><span class='rbracket'>]</span>
+<span class='comment'>#=&gt; #&lt;Opening:0x007ff69c858258 @name=&quot;King&#39;s pawn game&quot;, @eco_code=&quot;C20&quot;, @moves=[:e4, :e5]&gt;
+</span><span class='id identifier rubyid_opening'>opening</span><span class='period'>.</span><span class='id identifier rubyid_to_fen'>to_fen</span>
+<span class='comment'>#=&gt; &#39;rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2&#39;
+</span></code></pre>
+
+<h2>Development</h2>
+
+<p>To install this gem onto your local machine, run <code>bundle exec rake install</code>. To release a new version, update the version number in <code>version.rb</code>, and then run <code>bundle exec rake release</code> to create a git tag for the version, push git commits and tags, and push the <code>.gem</code> file to <a href="https://rubygems.org">rubygems.org</a>.</p>
+
+<h2>Contributing</h2>
+
+<ol>
+<li>Fork it ( <a href="https://github.com/simaoneves/chess_openings/fork">https://github.com/simaoneves/chess_openings/fork</a> )</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am &#39;Add some feature&#39;</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create a new Pull Request</li>
+</ol>
+</div></div>
+
+      <div id="footer">
+  Generated on Thu Jan 12 10:12:16 2017 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.7 (ruby-2.2.0).
+</div>
+
+    </div>
+  </body>
+</html>

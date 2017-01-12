@@ -1,0 +1,4 @@
+lib/chess_openings.rb 46752f37f62d27c9adc0c321f48ffc4f89cda525
+lib/chess_openings/opening.rb 47b8824624e83318b4855a0ebf10b44cd3208813
+lib/chess_openings/search_tree.rb f98ffb2f3089682a85ba6b4a129512d0d30c5b36
+lib/chess_openings/chess_openings_helper.rb 0f39c3cb6fbd142bb50a222a52ebfa90ef0b74a4

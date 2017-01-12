@@ -1,5 +1,6 @@
 require_relative 'chess_openings_helper.rb'
 
+# Class that is a Tree-like data structure to hold all Openings
 class SearchTree
 
   attr_accessor :root
@@ -8,38 +9,67 @@ class SearchTree
     @root = Node.new(nil)
   end
 
+  # Check if tree doesnt have child Nodes and root is empty
+  #
+  # @return [Boolean] True if the tree doesnt have childs and root value is nil, false otherwise
   def empty?
-    @root.is_leaf?
+    @root.is_empty? && @root.is_leaf?
   end
 
+  # Number of not empty Nodes
+  #
+  # @return [int] Total of not empty Nodes in the tree
   def size
     size_helper(@root)
   end
 
+  # String representation of the tree
+  #
+  # @return [String] Representation of the Nodes in the tree
   def to_s
     @root.to_s
   end
 
+  # Compares two trees
+  #
+  # @param [SearchTree] other SearchTree to be compared with
+  # @return [Boolean] True if both trees have the same children with the same values
   def ==(other)
     @root == other.root
   end
 
+  # Insert new value in SearchTree at the depth of the moves
+  #
+  # @param [Array] moves Path to the place to insert the value
+  # @param [Opening] value Value to be inserted in the tree
   def insert(moves, value)
     moves = ChessOpeningsHelper.moves_as_symbols(moves)
     insert_helper(moves, value, @root)
   end
 
+  # Search in the tree with the path moves
+  #
+  # @param [Array] moves Array with Strings or symbols that represent the path
+  # @return [Opening] Opening that was found in the tree, Nil otherwise
   def search(moves)
     moves = ChessOpeningsHelper.moves_as_symbols(moves)
     search_helper(moves, @root)
   end
 
+  # Search the tree for all the values from the path and values of its children
+  #
+  # @param [Array] moves Array with Strings or symbols that represent the path
+  # @return [Array] Array with values found
   def search_all_with_moves(moves)
     moves = ChessOpeningsHelper.moves_as_symbols(moves)
     node = find_node(moves, @root)
     get_all_from_node(node).flatten
   end
 
+  # Get all values at a certain depth
+  #
+  # @param [int] num Depth to be used to find values
+  # @return [Array] Array with all the values found at depth num
   def get_moves_in_depth(num)
     get_moves_in_depth_helper(num, @root, 0).flatten
   end
@@ -62,7 +92,7 @@ class SearchTree
       curr_hash = curr_node.nodes
       move = moves.first
       return nil if curr_hash[move].nil?
-      
+
       next_node = curr_hash[move]
       find_node(moves.drop(1), next_node)
     end
@@ -115,6 +145,7 @@ class SearchTree
       return sum
     end
 
+  # Class that represents a node of a tree data structure
   class Node
 
     attr_accessor :value, :nodes
@@ -122,6 +153,10 @@ class SearchTree
     def initialize(value)
       @value = value
       @nodes = {}
+    end
+
+    def is_empty?
+      @value.nil?
     end
 
     def is_leaf?
@@ -142,7 +177,7 @@ class SearchTree
 
     def ==(other)
       return false if self.size != other.size || @value != other.value
-      
+
       @nodes.keys.each do |key|
         return false unless other.keys.include?(key)
       end
