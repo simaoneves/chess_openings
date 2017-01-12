@@ -2,9 +2,6 @@ Chess Openings
 ==========================
 Ruby gem that where you can manipulate, search for and get information from chess openings.
 
-## TODOS:
-- Write documentation
-
 ## Features:
 - Get opening from PGN file
 - Get opening from PGN string

@@ -1,7 +1,11 @@
+#!/usr/bin/env ruby
+
 require 'nokogiri'
 require 'open-uri'
 require 'json'
-load 'opening.rb'
+require_relative '../lib/chess_openings/opening'
+
+puts 'working'
 
 def get_eco_code(name)
   name.split(' ').first
