@@ -84,12 +84,12 @@ openings = chess_openings.with_name "alekhine defence"
 =end
 ```
 
-####.get_all
+####.all
 Get all existing openings as an array
 
 ```ruby
 chess_openings = ChessOpenings.new
-all_openings = chess_openings.get_all
+all_openings = chess_openings.all
 =begin
 [
   [0] #<Opening:0x007f8209dd4b30 @name="Polish (Sokolsky) opening", @eco_code="A00", @moves=[:b4]>,
