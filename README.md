@@ -2,6 +2,7 @@ Chess Openings
 ==========================
 Ruby gem that where you can manipulate, search for and get information from chess openings.
 
+Search, manipulate and get information on chess openings
 ## Features:
 - Get opening from PGN file
 - Get opening from PGN string
@@ -39,7 +40,7 @@ chess_openings = ChessOpenings.new
 
 From here you can use several functions:
 
-####.from_pgn
+#### .from_pgn
 Get opening from PGN file
 
 ```ruby
@@ -49,7 +50,7 @@ opening = chess_openings.from_pgn('path_to/pgn_game.pgn')
 ```
 
 
-####.from_string
+#### .from_string
 Get opening from a string, formated like a PGN file
 
 ```ruby
@@ -59,7 +60,7 @@ opening = chess_openings.from_string("1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Bxc6")
 ```
 
 
-####.from_moves
+#### .from_moves
 Get opening from an array with moves (as symbols or strings)
 
 ```ruby
@@ -68,7 +69,7 @@ opening = chess_openings.from_moves [:e4, :c6, :d4, :d5]
 #=> #<Opening:0x007f8209d9c910 @name="Caro-Kann defence", @eco_code="B12", @moves=[:e4, :c6, :d4, :d5]>
 ```
 
-####.with_name
+#### .with_name
 Search openings by name
 
 ```ruby
@@ -84,7 +85,7 @@ openings = chess_openings.with_name "alekhine defence"
 =end
 ```
 
-####.all
+#### .all
 Get all existing openings as an array
 
 ```ruby
@@ -100,7 +101,7 @@ all_openings = chess_openings.all
 =end
 ```
 
-####.that_start_with
+#### .that_start_with
 Get all possible openings that start with determined moves
 
 ```ruby
@@ -119,7 +120,7 @@ e4_e5_openings = chess_openings.that_start_with [:e4, :e5]
 =end
 ```
 
-####.from_fen
+#### .from_fen
 Get opening from FEN string
 
 ```ruby
@@ -127,13 +128,9 @@ opening_from_fen = chess_openings.from_fen 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1P
 #=> #<Opening:0x007ff69c858258 @name="King's pawn game", @eco_code="C20", @moves=[:e4, :e5]>
 ```
 
-
-
-
-
 When you have a opening you can invoke these methods on it:
 
-####.to_pgn
+#### .to_pgn
 Get PGN string from an opening
 
 ```ruby
@@ -143,7 +140,7 @@ opening.to_pgn
 #=> "1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Bxc6"
 ```
 
-####.to_fen
+#### .to_fen
 Get FEN string of the opening
 
 ```ruby
